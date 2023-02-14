@@ -1,5 +1,5 @@
 """
-WSGI config for doomsday_machine project.
+WSGI config for no_clipper project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'doomsday_machine.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'no_clipper.settings')
 
 application = get_wsgi_application()
