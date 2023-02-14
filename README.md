@@ -8,7 +8,7 @@ No Clipper is an **active** recon tool to quickly map an organizations network a
 
 This material was prepared solely for informational purposes to clarify our intentions (by us, we mean all direct contributors to the project).
 
-### **I. Non-responsability of software misuse **
+### **I. Non-responsability of software misuse**
 
 This software is a simple banner grabbing tool made in an educational context. It's sole and only purpose is to help IT and Cybersecurity professionals do their job of reconnaissance.
 
