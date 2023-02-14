@@ -44,12 +44,10 @@ class ActiveBannerScanner:
         'isUp' : self.isUp})
 
     def grab_banner(self):
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            try :
-                s.connect((self.host.ip, self.port))
-                s.send(b'\x00')
+        with socket.socket(socket.AF_INET,socket.SOCK_STREAM) as s:
+            res = s.connect_ex((self.host.ip, self.port))
+            if res == 0 :
+                s.send(b'who_r_u?')
                 self.banner = s.recv(1024)
-                s.close()
-            except :
                 self.isUp = False 
         self.isUp = True
