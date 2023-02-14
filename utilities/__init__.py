@@ -1,1 +1,1 @@
-from bannergrab import *
+from .bannergrab import *
