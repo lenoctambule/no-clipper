@@ -27,4 +27,4 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       run: |
-        python doomsday_machine/manage.py test
+        python no_clipper/manage.py test
