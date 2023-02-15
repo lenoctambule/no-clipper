@@ -4,7 +4,7 @@
 
 No Clipper is an **active** recon tool to quickly map an organizations network and services. 
 
-## Import information
+## Important information
 
 This material was prepared solely for informational purposes to clarify our intentions (by us, we mean all direct contributors to the project).
 
