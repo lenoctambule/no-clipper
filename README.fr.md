@@ -1,3 +1,5 @@
+[EN](./README.md) | [FR](./README.fr.md)
+
 # No Clipper
 
 No clipper est un logiciel de reconnaissance active pour cartographier rapidement le réseau d'une organisation et ses services.
