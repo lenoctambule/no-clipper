@@ -14,7 +14,7 @@ class Host:
         req = requests.get(RIR_API_URL+ip)
         return json.loads(req.content)
 
-    def __init__(self, ip : str) -> bool:
+    def __init__(self, ip : str) -> None:
         self.ip = ip
 
     def reqbanner(self, port : int) -> bool:
@@ -47,7 +47,7 @@ class ActiveBannerScanner:
         with socket.socket(socket.AF_INET,socket.SOCK_STREAM) as s:
             res = s.connect_ex((self.host.ip, self.port))
             if res == 0 :
-                s.send(b'who_r_u?')
+                s.send(b'GET / HTTP/1.1')
                 self.banner = s.recv(1024)
                 self.isUp = False 
         self.isUp = True
