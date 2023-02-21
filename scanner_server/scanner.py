@@ -1,13 +1,11 @@
 import bannergrab as bg
 import random as rand
-import requests, sys
+import requests, json
 
 DELTA_DELAY = (0.5,2)
 DEFAULT_SCAN = [80, 8000, 8080]
 API_POSTADRESS = ['http://localhost:8000/api/add-service']
-HELP_MESSAGE = "Usage : python scanner.py <batch_size> <url>"
-DEBUG_MSGS = {'init' : "Initalising scan ...", 
-                'start' : "Scan initialized\n[Scan running] \nPress Ctrl+C to stop" }
+
 
 class Scan:
     hosts_batch = list()
@@ -23,16 +21,13 @@ class Scan:
 
     @staticmethod
     def send2api(service_banner : bg.ActiveBannerScanner, url) -> int:
-        obj = {
-                'host' : service_banner.host.ip, 
-                'banner' : service_banner.banner,
+        obj = { 
+                'banner' : service_banner.banner.decode(),
                 'port' : service_banner.port,
+                'host' : service_banner.host.ip,
                }
-        try :
-            req = requests.post(url, data=obj, timeout=2.0)
-        except :
-            return 0
-        return req
+        req = requests.post(url, data=json.dumps(obj), timeout=2.0)
+        return req.status_code
    
     def startscan(self) -> None:
         for port in self.port_list:
@@ -41,7 +36,8 @@ class Scan:
                 if host.service_banners[port].get_dict()['isUp'] == False :
                     pass
                 if host.service_banners[port].get_dict()['banner'] != '' :
-                    code = self.send2api(host)
+                    code = self.send2api(host.service_banners[port], self.url)
+                    print("Service found at",host.ip," on port ",port)
                     if code != 201:
                         print("[Error] Request failed to storage server (code=",code,")")
 
@@ -62,25 +58,3 @@ class Scan:
                 raise Exception("Invalid port.")
         self.port_list = port_list
 
-if __name__ == "__main__":
-    if len(sys.argv) != 3 :
-        print(HELP_MESSAGE)
-        exit(0)
-    batch_size = None
-    api_url = None
-
-    try :
-        batch_size = int(sys.argv[1])
-        api_url = sys.argv[2]
-    except :
-        print("Invalid args. \n",HELP_MESSAGE)
-        exit(0)
-
-    print(DEBUG_MSGS['init'])
-    scan = Scan(api_url)
-    scan.genbatch_from_rand(batch_size)
-
-    print(DEBUG_MSGS['start'])
-    while (1):
-        scan.startscan()
-        scan.genbatch_from_rand(batch_size)
