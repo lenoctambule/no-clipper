@@ -15,15 +15,3 @@ class ServiceViewSet(viewsets.ModelViewSet):
         banner = Service(banner=data['banner'], host=host, port=data['port'])
         banner.save()
         return Response(data, status=201)
-
-"""
-@api_view(['GET','POST'])
-def service_list(request):
-    if request.method == 'POST' :
-        data = json.loads(request.body)
-        banner = Service(banner=data['banner'], host=data['host'], port=data['port'])
-        banner.save()
-        return Response(data, status=201)
-    elif request.method == 'GET' :
-        return Response(status=404)
-"""

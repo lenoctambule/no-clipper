@@ -62,8 +62,11 @@ class Scan:
 						print("[Error] Request failed to storage server (code=",code,")")
 		
 
+	"""
+	TODO : Subnet targeted scanning
+	"""
 	def genbatch_from_mask(self, ip : str, mask : int) -> bool :
-		self.subnet = IPV4Subnet.from_cidr()	
+		pass
    
 	def genbatch_from_rand(self, size=200) -> bool :
 		for j in range(size):
