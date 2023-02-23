@@ -20,7 +20,7 @@ if __name__ == "__main__":
         exit(0)
 
     print(DEBUG_MSGS['init'])
-    scan = scanner.Scan(api_url, mode=scanner.scanmode.RAND)
+    scan = scanner.Scan(api_url)
 
     print(DEBUG_MSGS['start'])
     while (1):

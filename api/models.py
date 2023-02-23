@@ -11,6 +11,6 @@ class Host(models.Model):
 class Service(models.Model):
     #host = models.ForeignKey(Host, on_delete=models.CASCADE, related_name='host_services', null=False)
     host = models.CharField(max_length=100)
-    banner = models.CharField(max_length=500)
+    banner = models.TextField()
     port = models.IntegerField()
     
