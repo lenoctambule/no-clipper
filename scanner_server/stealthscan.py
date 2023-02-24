@@ -17,10 +17,29 @@ class StealthScanTCP:
 	def set_portlist(self, plist : list()) :
 		self.port_list = plist
 
+	def check_port(self, port):
+		resp = self.sendflag(port, 'S')
+		if resp != None :
+			if resp.haslayer(TCP) and resp[TCP].flags == 'SA' :
+				self.sendflag(port, 'R')
+				self.open_ports.append(port)
+
 	def startscan(self):
-		for port in self.port_list :
-			resp = self.synreq(port, 'S')
-			if resp != None :
-				if resp.haslayer(TCP) and resp[TCP].flags == 'SA' :
-						self.rstreq(port, 'R')
-						self.open_ports.append(port)
+		threads = list()
+		for i in self.port_list:
+			t = threading.Thread(target=self.check_port, args=[i])
+			t.daemon = True
+			threads.append(t)
+		for t in threads :
+			t.start()
+		for t in threads :
+			t.join()
+
+"""
+import time
+start = time.time()
+s = StealthScanTCP('192.168.1.1')
+s.startscan()
+print(s.open_ports)
+print("Execution time : ", time.time() - start)
+"""

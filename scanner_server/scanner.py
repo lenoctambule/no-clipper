@@ -24,6 +24,10 @@ class IPV4Subnet:
 		ip_bin = [j if jdx < cidr else '1' for jdx, j in enumerate(ip_bin)]
 		cls.ip_last = [int(''.join(ip_bin[i:i+8]), 2) for i in range(0,len(ip_bin),8)]
 		return (cls)
+	
+	@staticmethod
+	def ip_to_int():
+		pass
 
 class Scan:
 	hosts_batch = list()
