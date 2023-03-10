@@ -20,6 +20,7 @@ from api import views
 
 router = routers.DefaultRouter()
 router.register(r'service', views.ServiceViewSet)
+router.register(r'host', views.HostViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

@@ -9,6 +9,7 @@ class Host:
 	whois_result = None
 	ripe_result = None
 	service_banners = dict()
+	open_ports = list()
 
 	@staticmethod
 	def whois(ip : str) -> dict:
