@@ -76,3 +76,4 @@ class ActiveBannerScanner:
 				self.isUp = True
 			else :
 				self.isUp = False
+
